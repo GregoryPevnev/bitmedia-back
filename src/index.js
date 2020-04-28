@@ -1,5 +1,4 @@
 const config = require("config");
+const server = require("./server");
 
-console.log(config.get("application"));
-console.log(config.get("database"));
-console.log(config.get("server"));
+server.start(config.get("server"));

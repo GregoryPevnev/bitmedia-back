@@ -1,6 +1,6 @@
+const config = require("config");
+
 module.exports = {
   client: "sqlite3",
-  connection: {
-    filename: "./db.sqlite"
-  }
+  connection: config.get("database"),
 };
