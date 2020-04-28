@@ -2,3 +2,4 @@
 /package-lock.json
 /scripts/dev.sh
 /Dockerfile
+/db.sqlite
