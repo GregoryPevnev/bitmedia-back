@@ -1,8 +1,8 @@
 module.exports = {
   application: {
     pageSize: 50,
-    defaultStart: "2019-10-23",
-    defaultEnd: "2019-10-30"
+    defaultStartDate: "2019-10-23",
+    defaultEndDate: "2019-10-30"
   },
   database: {
     filename: "./db.sqlite"

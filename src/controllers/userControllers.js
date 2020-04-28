@@ -1,14 +1,17 @@
 const config = require("config");
 const { findUsers, findUser, countUsers } = require("../queries/userQueries");
-const { findStats } = require("../queries/statQueries");
 
 const PAGE_SIZE = config.get("application").pageSize;
 
 // TODO: Think about moving logic away to Queries
 
 exports.userList = async (req, res) => {
-  const pageNumber = Number(req.query.page || 0);
-  const page = Math.max(pageNumber, 1);
+  const page = Number(req.query.page || 1);
+
+  if (page < 1)
+    return res.status(400).json({
+      message: "Invalid page number (Starting from 1)"
+    });
 
   const startIndex = (page - 1) * PAGE_SIZE;
   const endIndex = page * PAGE_SIZE;
@@ -34,14 +37,10 @@ exports.userDetails = async (req, res) => {
 
   if (user === null)
     return res.status(404).json({
-      user: null,
-      stats: [],
+      message: "User not found"
     });
-
-  const stats = await findStats(userId);
 
   return res.status(200).json({
     user,
-    stats,
   });
 };
