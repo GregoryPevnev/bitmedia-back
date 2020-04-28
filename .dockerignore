@@ -1,0 +1,4 @@
+/node_modules
+/package-lock.json
+/scripts/dev.sh
+/Dockerfile
