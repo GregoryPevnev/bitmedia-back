@@ -12,8 +12,7 @@ module.exports = {
       autorestart: true,
       max_memory_restart: "1G",
       env: {
-        NODE_ENV: "production",
-        DEBUG: "app:*"
+        NODE_ENV: "production"
         // The rest of variables is passed down by Docker
       }
     }

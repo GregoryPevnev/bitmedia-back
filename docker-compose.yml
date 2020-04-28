@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  backend:
+    container_name: backend
+    hostname: backend
+    image: gregorypevnev/bit-backend
+    environment:
+      DATABASE_FILE: /data/bit/db.sqlite
+      SERVER_PORT: 80
+      SERVER_HOST: "0.0.0.0"
+    ports:
+      - 80:80
+    volumes:
+      - bit-data:/data/bit
+    networks:
+      - backend-network
+    deploy:
+      mode: replicated
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+        delay: 3s
+        max_attempts: 5
+        window: 120s
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 256M
+
+volumes:
+  bit-data:
+    name: bit-data
+    driver: local
+
+networks:
+  backend-network:
+    name: backend-network
+    driver: overlay

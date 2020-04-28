@@ -3,3 +3,4 @@
 /scripts/dev.sh
 /Dockerfile
 /db.sqlite
+/docker-compose.yml
