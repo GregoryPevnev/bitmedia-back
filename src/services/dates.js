@@ -1,13 +1,13 @@
-const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}$/
+const DATE_FORMAT = /^\d{4}-\d{2}-\d{2}$/;
 
-const isDate = date => DATE_FORMAT.test(date) && !Number.isNaN(date.getTime());
+const dateFrom = date => new Date(date);
 
-const isRange = (startDate, endDate) => startDate.getTime() < endDate.getTime();
+const isDate = date => DATE_FORMAT.test(date) && !Number.isNaN(dateFrom(date).getTime());
 
-exports.validateDates = (start, end) => {
+const isRange = (startDate, endDate) => dateFrom(startDate).getTime() < dateFrom(endDate).getTime();
+
+exports.validateDates = (startDate, endDate) => {
   const errors = [];
-
-  const startDate = new Date(start), endDate = new Date(end);
 
   if (!isDate(startDate)) errors.push("Invalid starting date");
   if (!isDate(endDate)) errors.push("Invalid ending date");

@@ -27,6 +27,8 @@ exports.userList = async (req, res) => {
     users,
     page,
     pages,
+    isFirst: page === 1,
+    isLast: page === pages,
   });
 };
 
