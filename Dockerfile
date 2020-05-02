@@ -14,7 +14,10 @@ COPY ./ /app/
 
 ENV DEBUG=app:*
 ENV NODE_ENV=production
+ENV DATABASE_FILE=/app/storage/db.sqlite
 
 HEALTHCHECK --interval=60s --timeout=10s --start-period=5s --retries=3 CMD curl --fail "http://localhost:$SERVER_PORT/api/info/health" || exit 1
+
+VOLUME /app/storage
 
 CMD ["sh", "./scripts/run.sh"]

@@ -6,13 +6,12 @@ services:
     hostname: backend
     image: gregorypevnev/bit-backend
     environment:
-      DATABASE_FILE: /data/bit/db.sqlite
       SERVER_PORT: 80
       SERVER_HOST: "0.0.0.0"
     ports:
       - 80:80
     volumes:
-      - bit-data:/data/bit
+      - bit-data:/app/storage
     networks:
       - backend-network
     deploy:
@@ -39,4 +38,4 @@ volumes:
 networks:
   backend-network:
     name: backend-network
-    driver: overlay
+    driver: bridge
