@@ -24,8 +24,8 @@ services:
         window: 120s
       resources:
         limits:
-          cpus: "0.50"
-          memory: 512M
+          cpus: "0.25"
+          memory: 256M
         reservations:
           cpus: "0.25"
           memory: 256M
