@@ -6,7 +6,6 @@ const DATA_COLUMNS = {
   "views": "page_views",
 };
 
-
 exports.findStats = (userId, {
   from,
   to,

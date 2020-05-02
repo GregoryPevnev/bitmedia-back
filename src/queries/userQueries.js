@@ -1,4 +1,7 @@
+const config = require("config");
 const knex = require("knex")(require("../../knexfile"));
+
+const PAGE_SIZE = config.get("application").pageSize;
 
 const DATA_COLUMNS = [
   "users.id",
@@ -9,8 +12,11 @@ const DATA_COLUMNS = [
   "users.ip_address"
 ];
 
-exports.findUsers = (start, end) =>
-  knex("users")
+exports.findUsers = (page) => {
+  const from = (page - 1) * PAGE_SIZE;
+  const to = page * PAGE_SIZE;
+
+  return knex("users")
     .select(DATA_COLUMNS)
     .sum({
       clicks: "users_statistic.clicks",
@@ -19,8 +25,9 @@ exports.findUsers = (start, end) =>
       "users.id": "users_statistic.user_id"
     }).groupBy(DATA_COLUMNS)
     .orderBy("users.id", "asc")
-    .offset(start)
-    .limit(end - start);
+    .offset(from)
+    .limit(to - from);
+}
 
 exports.findUser = userId =>
   knex("users").select(DATA_COLUMNS)

@@ -3,8 +3,6 @@ const { findUsers, findUser, countUsers } = require("../queries/userQueries");
 
 const PAGE_SIZE = config.get("application").pageSize;
 
-// TODO: Think about moving logic away to Queries
-
 exports.userList = async (req, res) => {
   const page = Number(req.query.page || 1);
 
@@ -13,11 +11,8 @@ exports.userList = async (req, res) => {
       message: "Invalid page number (Starting from 1)"
     });
 
-  const startIndex = (page - 1) * PAGE_SIZE;
-  const endIndex = page * PAGE_SIZE;
-
   const [users, count] = await Promise.all([
-    findUsers(startIndex, endIndex),
+    findUsers(page),
     countUsers()
   ]);
 
